@@ -1,0 +1,61 @@
+%!PS
+
+/xsquared {
+    /x exch def
+    x dup mul 
+} def
+
+/xplusone {
+    /x exch def
+    x 2 add 
+} def
+
+/makeCircle
+{0 0 25 0 360 arc stroke} def
+/a 7 def
+/b 4 def
+/d 1 def
+
+/xt 
+{
+    /t exch def
+    a b sub t cos mul a b sub t mul b div cos d mul
+} def
+
+/yt 
+{
+    /t exch def
+    a b sub t sin mul a b sub t mul b div sin d mul
+} def
+
+
+
+
+
+% THIS IS A FUCKING FOR LOOP BITCH!!!!!! vvvvv
+
+.8 0 .9
+setrgbcolor
+/j 1 def
+newpath
+200 200 moveto
+0 1 1500 {
+% 1 j cos rlineto
+j xt rlineto
+ /j 1 j add def
+} for
+stroke
+
+%% HELL YES ^^^^^^
+
+0 .7 .3
+setrgbcolor
+100 100 moveto
+1 xt rlineto
+stroke
+(Arial)
+findfont
+24
+scalefont
+setfont
+
