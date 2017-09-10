@@ -1,0 +1,40 @@
+%!PS
+/a 7 def
+/b 4 def
+/c 2 def
+/d 1 def
+
+/xt 
+{
+    /t exch def
+    a b sub t cos mul a b sub t mul b div cos d mul
+} def
+
+/yt 
+{
+    /t exch def
+    a b sub t sin mul a b sub t mul b div sin d mul
+} def
+
+
+
+0 0 0
+setrgbcolor
+/j 1 def
+/s 200 def
+0 1 8{
+/j 1 def
+newpath
+200 s moveto
+0 1 1500 {
+% 1 j cos rlineto
+j xt rlineto
+ /j 1 j add def
+} for
+stroke
+s 500 div 0 s 950 div 
+setrgbcolor
+/s s 1 add def
+} for
+
+
