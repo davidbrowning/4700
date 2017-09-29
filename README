@@ -1,0 +1,19 @@
+Assignment README
+
+To be given: file with rooms. 
+
+Evil dr. sundberg (alien) 
+week 1) static query
+
+week 3) puzzles
+week 4) UI
+
+Extra Credit: Write descriptions of game resources. 
+
+How to include files in prolog
+:-include(adventure). << includes extra files. `
+
+connected(X,Y) :- door(X,Y)
+connected(Y,X) :- door(Y,X)
+
+if items in inventory, list short/long description. 

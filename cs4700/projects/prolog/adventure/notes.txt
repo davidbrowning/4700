@@ -1,0 +1,12 @@
+
+# variables must begin w/capital letter!!
+#  therefore anything w/capital letter is var
+use trace to debug!
+:-include(adventure).
+
+# variables must begin w/capital letter!!
+#  therefore anything w/capital letter is var
+
+listThings(Place):-location(X,Place),name(X, Name), write(Name), nl, fail. 
+
+
