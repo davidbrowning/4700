@@ -1,0 +1,53 @@
+%!PS
+
+% David Browning
+
+%(Arial)
+%findfont
+%32
+%scalefont
+%setfont
+%% X then Y
+%150 550
+%moveto
+%(Hello World)
+%.8 .30 .20
+%setrgbcolor
+%show
+
+/inch {72 mul} def
+/square 
+ { 
+     /l exch def
+     newpath
+     0 0 moveto
+     0 l lineto
+     l l lineto
+     l 0 lineto
+     closepath
+ } def
+
+%(Times-Italic) findfont 30 scalefont setfont
+
+
+%/printZip
+%{ 0 0 moveto (Dave) show } def
+320 400 translate
+
+%.95 -.05 0
+%{ setgray printZip -1 .5 translate } for
+%1 setgray printZip
+
+%40 40 translate
+%.95 -.05 0
+%{setgray 1 inch square fill -1 4.7 translate } for
+0 0 1
+setrgbcolor
+/makeCircle
+{0 0 25 0 360 arc stroke} def
+makeCircle
+
+% x(t) = ((a-b)*cos(t)) + (d*cos(((a-b)*t)/b))
+% y(t) = ((a-b)*sin(t)) + (d*sin(((a-b)*t)/b))
+
+showpage

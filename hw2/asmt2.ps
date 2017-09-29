@@ -1,0 +1,252 @@
+%!PS
+/printthing
+{
+    /word exch def
+    (Arial)
+    findfont
+    24
+    scalefont
+    setfont
+    % X then Y
+    150 550
+    moveto
+    word
+    .8 .30 .20
+    setrgbcolor
+    show
+} def
+
+
+/circxy
+{
+    /t exch def
+    t t sin mul
+    t t cos mul
+}
+def
+
+/xt 
+{
+    /t exch def
+    a b sub t cos mul a b sub t mul b div cos d mul
+} def
+
+/yt 
+{
+    /t exch def
+    a b sub t sin mul a b sub t mul b div sin d mul
+} def
+
+/inch
+{ 72 mul } def
+
+/center
+{ 
+/one exch def
+/two exch def
+4 inch one add 5.5 inch two add
+} def
+
+clear
+
+/F 
+{
+  0 eq { 0 20 rlineto } if
+} def
+
+/G 
+{
+  0 eq { 10 0 rlineto } if
+} def
+
+/angle 60 def
+
+/+ {angle rotate} def
+/- {angle neg rotate} def
+/l {gsave} def
+/r {stroke grestore} def
+
+/x 
+{ 
+ dup 0 ne 
+ { 
+  1 sub 8 {dup} repeat G x - G x + + G x
+ } if pop
+} def
+
+/fun 
+{ 
+ dup 0 ne 
+ { 
+  1 sub 10 {dup} repeat F fun l - fun F r + fun F
+ } if pop
+} def
+
+/lightning 
+{ 
+ dup 0 ne 
+ { 
+  1 sub 10 {dup} repeat F lightning l - F lightning r F l + lightning F r F - F + F  
+ } if pop
+} def
+
+gsave 
+  newpath
+  0 0 moveto
+  100 setlinewidth
+  0 inch 11 inch lineto
+  8.5 inch 11 inch lineto
+  8.5 inch 0 inch lineto
+  0 0 lineto
+  closepath
+  0 0 .1 setrgbcolor
+  fill
+  stroke
+grestore
+
+gsave 
+  newpath
+  0 0 moveto
+  100 setlinewidth
+  0 inch 4 inch lineto
+  8.5 inch 4 inch lineto
+  8.5 inch 0 inch lineto
+  0 0 lineto
+  closepath
+  0 .07 0 setrgbcolor
+  fill
+  stroke
+grestore
+
+gsave 
+  newpath
+  0 0 moveto
+  .06 0 0 setrgbcolor
+  10 setlinewidth
+  0 inch 4 inch moveto
+  1 inch 4 inch lineto
+  2 inch 5 inch lineto
+  3 inch 4 inch lineto
+  4 inch 4 inch lineto
+  5 inch 4 inch lineto
+  6 inch 4 inch lineto
+  7 inch 4 inch lineto
+  8.5 inch 4 inch lineto
+  fill
+  stroke
+grestore
+
+newpath 
+1 inch 10 inch moveto
+10 setlinewidth
+5 x stroke 
+
+newpath 
+1 inch 10 inch moveto
+1 setlinewidth
+.2 .2 .9 setrgbcolor
+5 x stroke 
+
+
+/angle 25 def
+gsave
+newpath 
+180 rotate
+0 0 moveto
+-300 -800 rmoveto
+10 setlinewidth
+0 0 0 setrgbcolor
+4 lightning stroke 
+grestore
+
+gsave
+newpath 
+180 rotate
+0 0 moveto
+-300 -800 rmoveto
+1 setlinewidth
+.9 .9 .2 setrgbcolor
+4 lightning stroke 
+
+grestore
+
+/angle 15 def
+
+gsave
+newpath 
+0 0 moveto
+-2 inch 3 inch center moveto
+20 setlinewidth
+0 0 0 setrgbcolor
+8 fun stroke 
+grestore
+
+gsave
+newpath 
+0 0 moveto
+-2 inch 3 inch center moveto
+1 setlinewidth
+.4 .9 .4 setrgbcolor
+8 fun stroke 
+grestore
+
+/angle 167 def
+gsave
+newpath 
+1 inch 5 inch moveto
+0 0 0 setrgbcolor
+10 setlinewidth
+9 x stroke 
+grestore
+gsave
+newpath 
+1 inch 5 inch moveto
+1 setlinewidth
+.2 .2 .9 setrgbcolor
+9 x stroke 
+grestore
+
+/angle 230 def
+gsave
+newpath 
+7 inch 10 inch moveto
+0 0 0 setrgbcolor
+10 setlinewidth
+2 x stroke 
+grestore
+gsave
+newpath 
+7 inch 10 inch moveto
+1 setlinewidth
+.9 .9 .9 setrgbcolor
+2 x stroke 
+grestore
+
+showpage
+
+%/drawSpiral
+%{
+%newpath 
+%0 circxy moveto 
+%1 1 1080
+%{
+%    /i exch def
+%    i circxy lineto
+%}
+%for
+%stroke
+%}
+%def
+%
+%3 inch 5 inch translate
+%.1 .1 scale
+%10 setlinewidth
+%1 1 300{
+%/i exch def
+%i 300 div  0 i 300 div 
+%setrgbcolor
+%drawSpiral
+%-1 rotate
+%
+%} for
+%
