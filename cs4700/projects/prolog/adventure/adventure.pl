@@ -120,7 +120,7 @@ name(elevator,"Elevator").
 name(potion,"potion").
 name(eslc_north,"Eccels Science Learning Center").
 name(eslc_south,"Eccels Science Learning Center").
-name(figurine,"alien figurine")
+name(figurine,"alien figurine").
 name(flask,"glass flask").
 name(fly,"dead fly").
 name(geology_building,"Geology Building").
@@ -157,6 +157,7 @@ name(tunnels_east,"Underground Tunnels").
 name(tunnels_north,"Underground Tunnels").
 name(tunnels_west,"Underground Tunnels").
 name(_,"").
+
 short_desc(animal_science,"a cozy-looking, white-bricked old building.").
 short_desc(avenue,"A broad walkway lined with trees.").
 short_desc(bedroom,"your bedroom - complete with dirty laundry and heaps of old homework, the sad remains of many hard fought battles waged over Dr. Sundberg's homework").
@@ -175,7 +176,7 @@ short_desc(computer_lab,"Many computers lined up and a desk at front of room").
 short_desc(elevator,"You are in a plain metal box.  There are buttons labeled with various locations.").
 short_desc(eslc_north,"You are on the north side of the ESLC.").
 short_desc(eslc_south,"You are on the south side of the ESLC.").
-short_desc(figurine,"Your roommate's alien figurine.  He always keeps it on his shelf.")
+short_desc(figurine,"Your roommate's alien figurine.  He always keeps it on his shelf.").
 short_desc(flask,"a glass flask suitable for mixing reagents").
 short_desc(fly,"the partially squished body of a dead house fly").
 short_desc(geology_building,"Large building with rocks and trees surrounding it").
@@ -188,11 +189,7 @@ short_desc(kitchen,"A small room containing the bare essentials, including a lea
 short_desc(large_disk,"a large disk glowing with alien energy").
 short_desc(laser,"Pulsating with energy, this laser could be used to imbue something with energy").
 short_desc(laser_lab,"Lasers shine in a beautiful array of cornea charing horror, good thing you have goggles on!").
-<<<<<<< HEAD
 short_desc(library,"Endless floors of books full of knowledge. A smiling librarian greets you as you enter, 'welcome to the library' she says.").
-=======
-short_desc(library,"Endless floors of books full of knowledge. A smiling librarian greets you as you enter, \"welcome to the library\" she says.").
->>>>>>> 1e40a834b50921f283b3795989f61dad5bcb0ab5
 short_desc(medium_disk,"a medium sized disk glowing with alien energy").
 short_desc(note,"a handwritten note from your roommate").
 short_desc(observatory,"A tower where you can stargaze.").
@@ -214,7 +211,7 @@ short_desc(tsc_patio,"A concrete patio with a water feature and multiple paths")
 short_desc(tunnels_east,"The underground tunnels are a confusing place.  I hope you don't get lost.").
 short_desc(tunnels_north,"The underground tunnels are a confusing place.  I hope you don't get lost.").
 short_desc(tunnels_west,"The underground tunnels are a confusing place.  I hope you don't get lost.").
-%short_desc(_,"").
+short_desc(_,"").
 
 long_desc(animal_science,"The early twentieth-century edifice has a certain charm to it; the worn white bricks, coral roof tiling, and neo-classical columns adorning the entrance lend themselves to a certain prideful, nostalgic semblence of old academia. A laminated banner with the words 'Animal Science' is sloppily taped above the front doors. Inside, however, you are surprised to only be met with fluorescent lighting, disjointed rennovations, and caffeine-dependent mathematicians.").
 long_desc(avenue,"A myriad of people walk every which way along the avenue.  All are seemingly unaware of their imminent destruction at Dr.Sundberg's hand.").
@@ -232,7 +229,7 @@ long_desc(computer_lab,"The room is filled with the glow and hum of many compute
 long_desc(elevator,"A large metal container used to transport people and large objects to different floors in a building.").
 long_desc(eslc_north,"").
 long_desc(eslc_south,"").
-long_desc(figurine,"Your roommate's alien figurine.  He's been obsessed with aliens since you met him.  You always wondered why, but after reading that note about Dr.Sundberg, it is all beginning to make sense.")
+long_desc(figurine,"Your roommate's alien figurine.  He's been obsessed with aliens since you met him.  You always wondered why, but after reading that note about Dr.Sundberg, it is all beginning to make sense.").
 long_desc(flask,"A small container made of glass that is wide at the base and narrow at the neck.  A purple liquid seems to have been left over from a previous experiment.").
 long_desc(fly,"Scientifically known as Syrphus Ribessi, this nuisance enjoys long buzzes around human faces and landing on perfectly good food. This particular house fly met an untimely death by squishing.").
 long_desc(geology_building,"").
