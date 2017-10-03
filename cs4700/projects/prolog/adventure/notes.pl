@@ -8,15 +8,18 @@
 %  simply run prolog, then use [notes]. to load this
 %  and the adventure file. 
 
-listThings(Place):-location(X,Place),name(X, Name), write(Name), nl,fail. 
-listThings(_). 
+listThings(Place):-location(X,Place),name(X, Name),short_desc(X,SD),format('~w: ~w',[Name,SD]),nl,fail. 
+listThings(_).
 
-listConnections(Place):-door(Place,Connection),door(Place, Connection), write(Connection),write(","), nl,fail. 
-listConnections(_). 
+listThingsLong(Thing):-name(Thing, Name),long_desc(Thing,LD),format('~w(~w) ~NContents: ~w~N',[Name,Thing,LD]),nl,fail. 
+listThingsLong(_).
 
-listShortDesc(Place):-short_desc(Place,SD),short_desc(Place, SD), write(SD),write("."), nl,fail. 
-listSortDesc(_). 
+listConnections(Place):-door(Place,Connection),short_desc(Connection, SD),format('~w: ~w,',[Connection,SD]),nl,fail. 
+listConnections(_).
 
-look(Place):-name(Place,Name),write(Name),nl,write("contains:"),nl,listThings(Place),nl,write("Connected Areas:"),nl,listConnections(Place),nl,write("Area Description:"),nl,listShortDesc(Place),nl.
-look(_). 
+writeShortDesc(Thing):-short_desc(Thing, SD), write(SD), nl. 
+
+look(Place):-name(Place,Name),write(Name),nl,write("contains:"),nl,listThings(Place),nl,write("Connected Areas:"),nl,listConnections(Place),nl,write("Area Description:"),nl,writeShortDesc(Place),nl,!.
+
+study(Thing):-listThingsLong(Thing),nl. 
 

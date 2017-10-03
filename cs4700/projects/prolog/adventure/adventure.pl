@@ -153,11 +153,11 @@ name(tsc_patio,"Patio of the TSC").
 name(tunnels_east,"Underground Tunnels").
 name(tunnels_north,"Underground Tunnels").
 name(tunnels_west,"Underground Tunnels").
-name(_,"").
+%name(_,"").
 
 short_desc(animal_science,"a cozy-looking, white-bricked old building.").
 short_desc(avenue,"").
-short_desc(bedroom,"").
+short_desc(bedroom,"Jeez you haven't made your bed in awhile."). 
 short_desc(potion,"An oily black potion").
 short_desc(bone,"a large dark stone").
 short_desc(charged_bone,"A small piece of 'dragon' bone").
@@ -207,7 +207,7 @@ short_desc(tsc_patio,"A concrete patio with a water feature and multiple paths")
 short_desc(tunnels_east,"The underground tunnels are a confusing place.  I hope you don't get lost.").
 short_desc(tunnels_north,"The underground tunnels are a confusing place.  I hope you don't get lost.").
 short_desc(tunnels_west,"The underground tunnels are a confusing place.  I hope you don't get lost.").
-short_desc(_,"").
+%short_desc(_,"").
 
 long_desc(animal_science,"The early twentieth-century edifice has a certain charm to it; the worn white bricks, coral roof tiling, and neo-classical columns adorning the entrance lend themselves to a certain prideful, nostalgic semblence of old academia. A laminated banner with the words 'Animal Science' is sloppily taped above the front doors. Inside, however, you are surprised to only be met with fluorescent lighting, disjointed rennovations, and caffeine-dependent mathematicians.").
 long_desc(avenue,"").
@@ -259,7 +259,7 @@ long_desc(tsc_patio,"").
 long_desc(tunnels_east,"").
 long_desc(tunnels_north,"").
 long_desc(tunnels_west,"").
-long_desc(_,"").
+%long_desc(_,"").
 
 puzzle(laser_lab):-has(goggles),!.
 puzzle(laser_lab):-write("It is too dangerous to go in without eye protection."),nl,!,fail.
