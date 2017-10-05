@@ -25,7 +25,12 @@ look(Thing):-write_name(Thing),write(" :"),nl,write_short(Thing),!.
 %Look with no arguments means look here.
 look:-here(Place),look(Place).
 
+%Recursively determine if a thing is in a location
+is_here(Thing,Location):-location(Thing,Container),is_here(Container, Location).
+is_here(Thing,Location):-Thing == Location,!.
+
 %Checked version of look action
+c_look(Thing):-here(X),is_here(Thing,X),look(Thing),!.
 c_look(Place):-here(Place),look(Place),!.
 c_look(Container):-container(Container),location(Container,X),here(X),look(Container),!.
 

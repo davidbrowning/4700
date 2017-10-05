@@ -74,6 +74,18 @@ function t7 () {
  " | prolog -q
 }
 
+# Test 8: Load File, teleport to green_beam, here(green_beam), look(key).
+function t8 () {
+  echo "Test 8: Load File, teleport to green_beam, here(green_beam), look(key)."
+ echo "Expected behavior: true, true, true, true"
+ printf "
+ $tf
+ teleport(green_beam).\n
+ here(green_beam).\n
+ c_look(key).\n
+ " | prolog -q
+}
+
 alias srtst="source ./run_tests.sh"
 
-functions=( t1 t2 t3 t4 t5 t6 t7 ) 
+functions=( t1 t2 t3 t4 t5 t6 t7 t8 ) 
