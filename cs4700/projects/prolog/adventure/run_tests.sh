@@ -86,6 +86,47 @@ function t8 () {
  " | prolog -q
 }
 
+# Test 9: Load File, teleport to green_beam, here(green_beam), look(key).
+function t9 () {
+  echo "Test 9: Load File, here(green_beam), take(key), location(key,_), has(key)."
+ echo "Expected behavior: true, false, true, false, true"
+ printf "
+ $tf
+ here(green_beam).\n
+ take(key).\n
+ location(key,_).\n
+ has(key).\n
+ " | prolog -q
+}
+
+# Test 10: Load File, teleport to green_beam, here(green_beam), c_take(key), location(key,_), has(key).
+function t10 () {
+  echo "Test 10: Load File, teleport to green_beam, here(green_beam), c_take(key), location(key,_), has(key)"
+ echo "Expected behavior: true, true, true, true, false, true"
+ printf "
+ $tf
+ teleport(green_beam).\n
+ here(green_beam).\n
+ c_take(key).\n
+ location(key,_).\n
+ has(key).\n
+ " | prolog -q
+}
+
+# Test 11: Load File, teleport to green_beam, here(green_beam), c_take(coat), location(coat,_), has(coat).
+function t11 () {
+  echo "Test 11: Load File, teleport to green_beam, here(green_beam), c_take(coat), location(coat,_), has(coat)"
+ echo "Expected behavior: true, true, true, true, false, true"
+ printf "
+ $tf
+ teleport(green_beam).\n
+ here(green_beam).\n
+ c_take(coat).\n
+ location(coat,_).\n
+ has(coat).\n
+ " | prolog -q
+}
+
 alias srtst="source ./run_tests.sh"
 
-functions=( t1 t2 t3 t4 t5 t6 t7 t8 ) 
+functions=( t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 ) 

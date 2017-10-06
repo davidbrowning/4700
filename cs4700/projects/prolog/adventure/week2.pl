@@ -40,6 +40,17 @@ teleport(Place):-retract(here(_)),assert(here(Place)),!.
 %Checked version of move action
 move(Place):-here(Current),connection(Current,Place),teleport(Place),!.
 
+%Unchecked Take
+summon(Thing):-assert(has(Thing)),retract(location(Thing,_)).
+
+%Unchecked Take
+take(Thing):-not(heavy(Thing)),assert(has(Thing)),retract(location(Thing,_)),!.
+
+%Checked Take
+c_take(Thing):-not(heavy(Thing)),not(container(Thing)),here(X),is_here(Thing,X),take(Thing),!.
+c_take(Thing):-container(Thing),location(Item,Thing),c_take(Item).
+
+
 %Unchecked (always successful) version of study action
 study(Place):-room(Place),look(Place),!.
 study(Container):-container(Container),write_name(Container),write(" :"),nl,write_long(Container),nl,list_things(Container),!.
