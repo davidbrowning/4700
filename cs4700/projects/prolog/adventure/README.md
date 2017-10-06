@@ -14,12 +14,14 @@ Week 2 in the prolog text based adventure game.
 ## Tests
 
 Two primary means of testing. 
+
 1) 
 $ ./run_all_tests.sh will
  * describe test
  * describe desired behavior
  * run test 
  * Note: this is a bash script which requires the command 'prolog' in the user's path to point to the prolog interpreter. 
+ 
  2) 
 $ source ./run_tests.sh
  * User may then call $ t$a where a is greater than 0 and a is less than 17 (e.g. t14)
