@@ -216,6 +216,8 @@ function t15 () {
  $tf
  teleport(green_beam).
  c_take(coat).
+ teleport(bedroom).
+ c_place(coat,bedroom).
  c_take(key,coat).
  c_place(key,coat).
  c_place(coat,green_beam).
@@ -227,6 +229,8 @@ function t15 () {
  $tf
  teleport(green_beam).
  c_take(coat).
+ teleport(bedroom).
+ c_place(coat,bedroom).
  c_take(key,coat).
  c_look(coat).
  c_place(key,coat).

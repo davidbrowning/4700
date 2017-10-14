@@ -1,0 +1,11 @@
+list([ ingredient ingredient2 ingredient3 ]).
+has_ingredients([]):-!.
+has_ingredients([H|T]):-has(H), has_ingredients(T).
+
+
+% pass the list of ingredients to remove
+remove_ingredients([]):-!.
+remove_ingredients([H|T]):-retract(has(H)), remove_ingredients(T).
+
+% Warning, this doesn't work, but this is the idea
+make(Item):-create_recipe(E,I,Item), remove(E), have:-(I),consume(I), assert(has(Item)).

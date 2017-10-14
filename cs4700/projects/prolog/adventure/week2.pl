@@ -53,7 +53,8 @@ take(Thing):-not(heavy(Thing)),assert(has(Thing)),retract(location(Thing,_)),!,n
 
 %Checked Take
 c_take(Thing):-not(heavy(Thing)),here(X),is_here(Thing,X),take(Thing),!.
-c_take(Thing, Container):-location(Thing,Container),has(Container),take(Thing),!.
+c_take(Thing, Container):-location(Thing,Container),here(X),is_here(Container,X),take(Thing),!.
+c_take(Thing, Container):-has(Container),take(Thing),!.
 
 %Unchecked Put: put the thing in the room you're in. 
 place(Thing):-has(Thing),retract(has(Thing)),here(Place),assert(location(Thing,Place)).
@@ -62,6 +63,7 @@ place(Thing,Location):-retract(has(Thing)),assert(location(Thing,Location)).
 %Checked put: if in player's location, put thing
 c_place(Thing,Location):-here(Location),place(Thing,Location),!.
 c_place(Thing,Container):-container(Container),has(Container),place(Thing,Container),!.
+c_place(Thing,Container):-container(Container),here(X),is_here(Container,X),place(Thing,Container),!.
 
 %Unchecked (always successful) version of study action
 study(Place):-room(Place),look(Place),!.
