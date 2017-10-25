@@ -1,0 +1,166 @@
+Part 1: Assignment Help
+-----------------------------------------------------------
+% V: verb
+% O: object
+% NP: noun phrase
+% VP: verb phrase
+
+Parse([V,O], L):-verb(V,L-NP) obj(O, NP-[])
+% Eventually want VP and NP to pull out articles (the, a, an)
+
+% FOR TRANSFER:
+% Parse(C,W) <- C: Command, W: word
+Parse([transfer, Disk, To, From], O)
+
+verb(move,["move"|X] -X).
+verb(move,["move","to" | X] -X).
+
+obj(hall,["hall"|X]-X).
+
+
+% Parse([V,O],["move","to","hall"])
+% L unifies to ["move","to","hall"]
+% V : move
+
+Part 2: Exam Review
+-----------------------------------------------------------
+CH1: Language Evaluation 
+-criteria for a good lang (readable)
+-features for a good lang (orthogonality)
+
+CH2: No Questions
+
+CH3-4: Parsing and Scanning
+-Regex
+-RE -> FA -> NFA (finite automita)
+-- HERE IS REGEX: MAKE FA or vice versa
+-context free grammars (CFG) go to book
+
+CH5: Value
+- Lifetime : from binding of value to when it goes away
+- Scope : where binding is visible
+(languages that combine lifetime and scope are less error prone)
+- Binding
+
+CH6,12:
+- Type
+-- Builtin data types
+-- abstraction support
+
+CH15: Prolog
+- Result of a Query, what does it unify with? 
+1 - 2 q's
+
+Bonus: Postscript
+
+Part 3: Ch 6 & 12
+-----------------------------------------------------------
+Do 2 types match? 
+same name? same def? 
+OR 
+same structure? 
+name is easier/safer
+
+Strong Type:
+ always detects all type errors
+ (virtually no languages in existence --maybe Java)
+ Can USE a language as a strongly typed language
+
+Primitive Types:
+ Defined by language
+ all user defined types must be defined in terms of primitive types
+ * Integer
+ * Floating Point: (XXXX.XXXXXXXX) or (X.XXXXXXXXXX) **see mom, the point floats around**
+ * Complex 
+ * Decimal (int multiplied by X amount) Fixed point
+ * Boolean
+ * Character
+
+Enumerations
+- What forms of coercion are allowed
+- What is the scope of the constants
+- How visible is the underlying representation
+
+Array
+- Legal subscripts
+- Is array checked? 
+- Allowed operations
+ * Slicing
+ * Membership
+ * Transportation
+ * Concatenation
+
+Array Categories
+- Static: memory bound before runtime
+- Fixed stack dynamic: local array of fixed size
+- fixed heap dynamic: int * x = new int[5] fixed size after allocation lifetime not bound to scope. 
+- heap dynamic: vector
+
+Array Implementation
+- Are multidementional arrays allowed? : still contiguous in memory
+- Row or column major? 
+- address[i] = address[0] + i * elementSize 
+
+String Design:
+- Character array or primitive
+- Static or Dynamic length
+
+String Operations
+- Slice
+- cat
+- Compare (case?)
+- Regex 
+
+Lists
+- Common in functional languages
+- List comprehensions
+ * construct one list from another via a function
+- Ranges
+- Infininte lists
+ * if language is lazy, infinite lists are possible. 
+
+Associative Arrays
+- hash/dictionaryies,maps
+- Associate a key w/a value
+- may be trees or hash tables
+
+lol... hashtag      associative_arr[#term]=your$#!t
+
+Records
+- formed by concatenating two or more types called fields (struct, class)
+- member types / fields
+
+Tuples
+- Tuples are like records but fields are anonymous
+- Arise in generic programming (think coordinates)
+
+Unions
+- List of types and value is at most one of the listed types
+- Discriminated(variant) or Free
+- "visitor" pattern. 
+  int x;
+  float y;
+  U u;
+  U.x = 3;
+  float z = U.y;
+
+Pointers
+- Entity is a reference to some other
+- Pointers are addresses
+- References refer to objects
+- (difference between pointer and references: pointer arithmetic makes sense, don't do stuff like that w/references)
+
+Reference Types
+
+Pointer Problems
+- Dangling Pointer
+- Garbage
+- Reference Semantics (aliasing)
+
+Garbage Collection
+- Reference counting
+- Mark and Sweep
+
+User Defined types. 
+
+

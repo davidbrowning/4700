@@ -1,5 +1,5 @@
 # test file
-tf="[week2]."
+tf="[week3]."
 
 # Test 1 load my file, test here(X)
 function t1 () {
@@ -266,6 +266,302 @@ function t16 () {
  " | prolog -q
 }
 
+function t17 () {
+  printf "
+  $tf
+  win.
+  "
+  printf "Expected behavior:
+  true
+  false
+  Execution Results:\n\n"
+
+  printf "
+  $tf
+  win.
+  " | prolog -q
+}
+
+function t18 () {
+  printf "
+  $tf
+  teleport(secret_lab).
+  win.
+  force_transfer(large_disk,pylon_c).
+  win.
+  force_transfer(medium_disk,pylon_c).
+  win.
+  force_transfer(small_disk,pylon_c).
+  win.
+  "
+  printf "Expected behavior
+  $tf | true
+  teleport(secret_lab). | true
+  win. | false
+  force_transfer(large_disk,pylon_c). | true
+  win. | false
+  force_transfer(medium_disk,pylon_c). | true
+  win. | false
+  force_transfer(small_disk,pylon_c). | true
+  win. | true
+  
+  Execution Results:\n\n"
+
+  printf "
+  $tf
+  teleport(secret_lab).
+  win.
+  force_transfer(large_disk,pylon_c).
+  win.
+  force_transfer(medium_disk,pylon_c).
+  win.
+  force_transfer(small_disk,pylon_c).
+  win.
+  " | prolog -q
+}
+
+function t19 () {
+  printf "
+  \n
+  $tf
+  teleport(secret_lab).
+  transfer(small_disk,pylon_c).
+  "
+  printf "
+  Expected Behavior: 
+  $tf | true
+  teleport(secret_lab). | true
+  transfer(small_disk,pylon_c). | true
+  \n
+  Results: \n\n
+  \n"
+  printf "
+  $tf
+  teleport(secret_lab).
+  transfer(small_disk,pylon_c).
+  " | prolog -q
+}
+
+function t20 () {
+  printf "
+  \n
+  $tf
+  teleport(secret_lab).
+  transfer(medium_disk,pylon_c).
+  "
+  printf "
+  Expected Behavior: 
+  $tf | true
+  teleport(secret_lab). | true
+  transfer(medium_disk,pylon_c). | false
+  \n
+  Results: \n\n
+  \n"
+  printf "
+  $tf
+  teleport(secret_lab).
+  transfer(medium_disk,pylon_c).
+  " | prolog -q
+}
+
+function t21 () {
+  printf "
+  \n
+  $tf
+  teleport(secret_lab).
+  transfer(small_disk,pylon_b).
+  transfer(medium_disk,pylon_c).
+  "
+  printf "
+  Expected Behavior: 
+  $tf | true
+  teleport(secret_lab). | true
+  transfer(small_disk,pylon_b). | true
+  transfer(medium_disk,pylon_c). | true
+  \n
+  Results: \n\n
+  \n"
+  printf "
+  $tf
+  teleport(secret_lab).
+  transfer(small_disk,pylon_b).
+  transfer(medium_disk,pylon_c).
+  " | prolog -q
+}
+
+function t22 () {
+  printf "
+  \n
+  $tf
+  teleport(secret_lab).
+  transfer(large_disk,pylon_c).
+  "
+  printf "
+  Expected Behavior: 
+  $tf | true
+  teleport(secret_lab). | true
+  transfer(large_disk,pylon_c). | false
+  \n
+  Results: \n\n
+  \n"
+  printf "
+  $tf
+  teleport(secret_lab).
+  transfer(large_disk,pylon_c).
+  " | prolog -q
+}
+
+function t22 () {
+  printf "
+  \n
+  $tf
+  teleport(secret_lab).
+  transfer(small_disk,pylon_c).
+  transfer(medium_disk,pylon_b).
+  transfer(small_disk,pylon_b).
+  transfer(large_disk,pylon_c).
+  "
+  printf "
+  Expected Behavior: 
+  $tf | true
+  teleport(secret_lab). | true
+  transfer(small_disk,pylon_c). | true
+  transfer(medium_disk,pylon_b). | true
+  transfer(small_disk,pylon_b). | true
+  transfer(large_disk,pylon_c). | true
+  \n
+  Results: \n\n
+  \n"
+  printf "
+  $tf
+  teleport(secret_lab).
+  transfer(small_disk,pylon_c).
+  transfer(medium_disk,pylon_b).
+  transfer(small_disk,pylon_b).
+  transfer(large_disk,pylon_c).
+  " | prolog -q
+}
+
+function t23 () {
+  printf "
+  \n
+  $tf
+  teleport(secret_lab).
+  transfer(small_disk,pylon_c).
+  transfer(medium_disk,pylon_b).
+  transfer(small_disk,pylon_b).
+  transfer(large_disk,pylon_c).
+  transfer(small_disk,pylon_a).
+  transfer(medium_disk,pylon_c).
+  transfer(small_disk,pylon_c).
+  win.
+  "
+  printf "
+  Expected Behavior: 
+  $tf | true
+  teleport(secret_lab). | true
+  transfer(small_disk,pylon_c). | true
+  transfer(medium_disk,pylon_b). | true
+  transfer(small_disk,pylon_b). | true
+  transfer(large_disk,pylon_c). | true
+  transfer(small_disk,pylon_a). | true
+  transfer(medium_disk,pylon_c). | true
+  transfer(small_disk,pylon_c). | true
+  win.
+  \n
+  Results: \n\n
+  \n"
+  printf "
+  $tf
+  teleport(secret_lab).
+  transfer(small_disk,pylon_c).
+  transfer(medium_disk,pylon_b).
+  transfer(small_disk,pylon_b).
+  transfer(large_disk,pylon_c).
+  transfer(small_disk,pylon_a).
+  transfer(medium_disk,pylon_c).
+  transfer(small_disk,pylon_c).
+  win.
+  " | prolog -q
+}
+
+function t24 () {
+  printf "
+  \n
+  $tf
+  teleport(ser_2nd_floor).
+  move(laser_lab).
+  take(goggles).
+  move(laser_lab).
+  "
+  printf "
+  Expected Behavior: 
+  $tf | true
+  teleport(ser_2nd_floor). | true
+  move(laser_lab). | false
+  take(goggles). | true
+  move(laser_lab). | true
+  \n
+  Results: \n\n
+  \n"
+  printf "
+  $tf
+  teleport(ser_2nd_floor).
+  move(laser_lab).
+  take(goggles).
+  move(laser_lab).
+  " | prolog -q
+}
+
+function t25 () {
+  test_string="
+  \n
+  $tf
+  take(bone).
+  has(bone).
+  has_ingredients([bone]). 
+  "
+  printf "$test_string"
+  printf "
+  Expected Behavior: 
+  $tf | true
+  take(bone). | true
+  has(bone). | true
+  has_ingredients([bone]). | true
+  \n
+  Results: \n\n
+  \n"
+  printf "$test_string" | prolog -q
+}
+
+function t26 () {
+  test_string="
+  \n
+  $tf
+  take(bone).
+  has(bone).
+  has_ingredients([bone]). 
+  teleport(laser_lab).
+  make(charged_bone).
+  has(bone).
+  has(charged_bone).
+  "
+  printf "$test_string"
+  printf "
+  Expected Behavior: 
+  $tf | true
+  take(bone). | true
+  has(bone). | true
+  has_ingredients([bone]). | true
+  teleport(laser_lab). | true
+  make(charged_bone). | true
+  has(bone). | false
+  has(charged_bone). | true
+  \n
+  Results: \n\n
+  \n"
+  printf "$test_string" | prolog -q
+}
 alias srtst="source ./run_tests.sh"
 
-functions=( t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 t13 t14 t15 t16 ) 
+functions=( t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 t13 t14 t15 t16 t17 t18 t19 t20 t21 t22 t23 t24 t25 t26 ) 
