@@ -23,8 +23,9 @@ list_inventory(_).
 list_connections(Place):-connection(X,Place),tab(2),write_name(X),write(" -"),tab(1),write_short(X),nl,fail.
 list_connections(_).
 
+%write('\33\[2J'),
 %Unchecked (always successful) version of look action
-look(Place):-room(Place),write('\33\[2J'),write_name(Place),write(" :"),nl,write_long(Place),nl,
+look(Place):-room(Place),write_name(Place),write(" :"),nl,write_long(Place),nl,
 write('You see: '),nl,list_things(Place),write('You can go to: '),nl,list_connections(Place),!.
 look(Container):-container(Container),write_name(Container),write(" :"),nl,write_short(Container),nl,write("It seems there may be something inside."),!.
 look(Thing):-write_name(Thing),write(" :"),nl,write_short(Thing),!.
@@ -43,13 +44,13 @@ c_look(Inv_item):-has(Inv_item),look(Inv_item),!.
 c_look(Container):-container(Container),location(Container,X),here(X),look(Container),!.
 
 %Unchecked version of move action
-teleport(Place):-retract(here(_)),assert(here(Place)),!.
+teleport(Place):-retract(here(_)),assert(here(Place)),write('You Teleported!'),!.
 
 %Checked version of move action
 move(Place):-puzzle(Place),here(Current),connection(Current,Place),teleport(Place),look(Place),!.
 
 %Completely unchecked Take
-summon(Thing):-assert(has(Thing)),retract(location(Thing,_)).
+summon(Thing):-assert(has(Thing)),retract(location(Thing,_)),write('You wizard you').
 
 %Unchecked Take
 take(Thing):-not(heavy(Thing)),assert(has(Thing)),retract(location(Thing,_)),!,nl,write("You obtained: "),write(Thing),write("."),!.
@@ -85,9 +86,9 @@ force_transfer(Disk,Pylon):-retract(location(Disk,_)),assert(location(Disk,Pylon
 win:-location(large_disk,pylon_c),location(medium_disk,pylon_c),location(small_disk,pylon_c),here(secret_lab),write("You win!!"),!.
 win:-quit(true),nl,write("You quit... quitter"),nl,!.
 
-transfer(small_disk,Pylon):-here(X),is_here(small_disk,X),retract(location(small_disk,_)),assert(location(small_disk,Pylon)),!.
-transfer(medium_disk,Pylon):-here(X),is_here(medium_disk,X),not(location(small_disk,Pylon)),location(medium_disk,CurrentLocation),not(location(small_disk,CurrentLocation)),retract(location(medium_disk,_)),assert(location(medium_disk,Pylon)).
-transfer(large_disk,Pylon):-here(X),is_here(large_disk,X),not(location(small_disk,Pylon)),not(location(medium_disk,Pylon)),location(large_disk,CurrentLocation),not(location(small_disk,CurrentLocation)),retract(location(large_disk,_)),assert(location(large_disk,Pylon)).
+transfer(small_disk,Pylon):-here(X),is_here(small_disk,X),retract(location(small_disk,_)),assert(location(small_disk,Pylon)),write('Transfer Successful'),!.
+transfer(medium_disk,Pylon):-here(X),is_here(medium_disk,X),not(location(small_disk,Pylon)),location(medium_disk,CurrentLocation),not(location(small_disk,CurrentLocation)),retract(location(medium_disk,_)),assert(location(medium_disk,Pylon)),write('Transfer Successful'),!.
+transfer(large_disk,Pylon):-here(X),is_here(large_disk,X),not(location(small_disk,Pylon)),not(location(medium_disk,Pylon)),location(large_disk,CurrentLocation),not(location(small_disk,CurrentLocation)),retract(location(large_disk,_)),assert(location(large_disk,Pylon)),write('Transfer Successful'),!.
 
 has_ingredients([]).
 has_ingredients([H|T]):-has(H), has_ingredients(T).
@@ -95,12 +96,20 @@ has_ingredients([H|T]):-has(H), has_ingredients(T).
 remove_ingredients([]):-!.
 remove_ingredients([H|T]):-retract(has(H)), remove_ingredients(T).
 
-make(Item):-create_recipe(E,I,Item),here(X),is_here(E,X),has_ingredients(I),remove_ingredients(I),assert(has(Item)),!.
+make(Item):-create_recipe(E,I,Item),here(X),is_here(E,X),has_ingredients(I),remove_ingredients(I),assert(has(Item)),write('You made a '),write(Item),!.
 
-verb(move, ["move" | X] - X).
+%obj(small_disk,["small","disk","to","blue","pylon" | X] -X).
+
+verb(transfer, ["transfer" | X] - X).
+verb(inventory, ["inventory" | X] - X).
+verb(make, ["make" | X] - X).
 verb(take, ["take" | X] - X).
 verb(take, ["pick","up" | X] - X).
 verb(take, ["retrieve" | X] - X).
+verb(summon, ["summon" | X] - X).
+verb(teleport, ["teleport" | X] - X).
+verb(teleport, ["teleport","to" | X] - X).
+verb(move, ["move" | X] - X).
 verb(move,["move","to" | X] - X).
 verb(move,["go","to" | X] - X).
 verb(look, ["look" | X] - X).
@@ -109,13 +118,25 @@ verb(study, ["study" | X] - X).
 verb(study, ["read" | X] - X).
 verb(quit,["quit" | X] -X).
 
+prep(to,["to" | X] -X).
+prep(from,["from" | X] -X).
+
 do_it(move(X)):-move(X),!.
+do_it(teleport(X)):-teleport(X),!.
+do_it(inventory):-inventory,!.
+do_it(transfer(X,Y)):-transfer(X,Y),!.
 do_it(take(X)):-c_take(X),!.
+do_it(make(X)):-make(X),!.
+do_it(summon(X)):-summon(X),!.
 do_it(look(X)):-c_look(X),!.
 do_it(study(X)):-c_study(X),!.
 do_it(look):-look,!.
 do_it(quit):-retract(quit(false)), assert(quit(true)),!.
 
+parse([V,O], L):-verb(V,L-NP), obj(O, NP-[]).
+parse([V,O1,O2], L):-verb(V,L-NP), obj(O1, NP-PP), obj(O2, PP-[]).
+parse([V], L):-verb(V,L-_).
+%parse([V], L):-verb(V,L-NP), obj(["the", "hall"], NP-[]).
 
 obj(agricultural_science,["Agricultural","Sciences","Building" | X] -X).
 obj(agricultural_science,["the","Agricultural","Sciences","Building" | X] -X).
@@ -125,11 +146,17 @@ obj(avenue,["A","tree","lined","avenue" | X] -X).
 obj(bedroom,["Your","bedroom" | X] -X).
 obj(bedroom_closet,["Your","Bedroom's","Closet" | X] -X).
 obj(bone,["large","dragon","bone" | X] -X).
+obj(bone,["dragon","bone" | X] -X).
+obj(bone,["bone" | X] -X).
+obj(bone,["the","bone" | X] -X).
 obj(book_a,["Corpus","Hermiticum" | X] -X).
 obj(book_b,["War","and","Peace" | X] -X).
 obj(book_c,["Great","Expectations" | X] -X).
 obj(bunsen_burner,["bunsen","burner" | X] -X).
-obj(charged_bone,["a","chunk","of","dragon","bone" | X] -X).
+obj(charged_bone,["charged","bone" | X] -X).
+obj(charged_bone,["a","charged","bone" | X] -X).
+obj(charged_bone,["charged","dragon","bone" | X] -X).
+obj(charged_bone,["a","chunk","of","charged","dragon","bone" | X] -X).
 obj(chemistry_lab,["Student","Chemistry","Lab" | X] -X).
 obj(clean_clothes,["Your","Clothes" | X] -X).
 obj(closet,["equipment","closet" | X] -X).
@@ -151,8 +178,10 @@ obj(eslc_south,["eslc","south" | X] -X).
 obj(eslc_north,["eslc","north" | X] -X).
 obj(figurine,["alien","figurine" | X] -X).
 obj(figurine,["the","alien","figurine" | X] -X).
+obj(flask,["flask" | X] -X).
 obj(flask,["glass","flask" | X] -X).
 obj(flask,["the","glass","flask" | X] -X).
+obj(fly,["fly" | X] -X).
 obj(fly,["dead","fly" | X] -X).
 obj(fly,["the","dead","fly" | X] -X).
 obj(geology_building,["Geology","Building" | X] -X).
@@ -170,6 +199,7 @@ obj(key,["the","key"| X] -X).
 obj(kitchen,["Kitchen"| X] -X).
 obj(kitchen,["the","Kitchen"| X] -X).
 obj(large_disk,["large","energy","disk" | X] -X).
+obj(large_disk,["large","disk" | X] -X).
 obj(large_disk,["the","large","energy","disk" | X] -X).
 obj(laser,["laser","array" | X] -X).
 obj(laser_lab,["Laser","Lab" | X] -X).
@@ -177,7 +207,8 @@ obj(laser_lab,["the","Laser","Lab" | X] -X).
 obj(library,["Merill-Caizer","Library" | X] -X).
 obj(library,["the","Merill-Caizer","Library" | X] -X).
 obj(lost_homework,["Some","student's","lost","geometry","homework." | X] -X).
-obj(medium_disk,["medium","energy disk" | X] -X).
+obj(medium_disk,["medium","energy","disk" | X] -X).
+obj(medium_disk,["medium","disk" | X] -X).
 obj(medium_disk,["the","medium","energy disk" | X] -X).
 obj(movie,["Men","in","Black" | X] -X).
 obj(note,["note"| X] -X).
@@ -189,17 +220,26 @@ obj(old_main,["the","Old","Main" | X] -X).
 obj(plaza,["Engineering","plaza" | X] -X).
 obj(plaza,["the","Engineering","plaza" | X] -X).
 obj(potion,["potion"| X] -X).
+obj(potion,["a","potion"| X] -X).
 obj(potion,["the","potion"| X] -X).
 obj(pylon_a,["red","pylon" | X] -X).
 obj(pylon_a,["the","red","pylon" | X] -X).
+obj(pylon_a,["to","red","pylon" | X] -X).
+obj(pylon_a,["to","the","red","pylon" | X] -X).
 obj(pylon_b,["blue","pylon" | X] -X).
 obj(pylon_b,["the","blue","pylon" | X] -X).
+obj(pylon_b,["to","blue","pylon" | X] -X).
+obj(pylon_b,["to","the","blue","pylon" | X] -X).
 obj(pylon_c,["green","pylon" | X] -X).
 obj(pylon_c,["the","green","pylon" | X] -X).
+obj(pylon_c,["to","green","pylon" | X] -X).
+obj(pylon_c,["to","the","green","pylon" | X] -X).
 obj(quad,["The","Quad" | X] -X).
 obj(recipe,["alchemical","recipe" | X] -X).
 obj(recipe,["the","alchemical","recipe" | X] -X).
 obj(roof,["On","the","roof","of","the","SER","Building" | X] -X).
+obj(roommate_room,["dormmate's","room" | X] -X).
+obj(roommate_room,["dormmate","room" | X] -X).
 obj(roommate_room,["Your","dormmate's","room" | X] -X).
 obj(roommate_room,["Your","roommate's","room" | X] -X).
 obj(secret_lab,["Dr.","Sundberg's","Secret","Lab" | X] -X).
@@ -208,6 +248,7 @@ obj(ser_1st_floor,["1st","Floor"| X] -X).
 obj(ser_2nd_floor,["2nd","Floor","of","SER","Building" | X] -X).
 obj(ser_2nd_floor,["2nd","Floor"| X] -X).
 obj(small_disk,["small","energy","disk" | X] -X).
+obj(small_disk,["small","disk" | X] -X).
 obj(special_collections,["Special","Collections","Room" | X] -X).
 obj(tsc,["Taggart","Student","Center" | X] -X).
 obj(tsc_patio,["Patio","of","the","TSC" | X] -X).
@@ -313,12 +354,9 @@ obj(laser,["the","laser" | X] -X).
 obj(bunsen_burner,["bunsen","burner" | X] -X).
 obj(bunsen_burner,["the","bunsen","burner" | X] -X).
 
-parse([V,O], L):-verb(V,L-NP), obj(O, NP-[]).
-parse([V], L):-verb(V,L-_).
-%parse([V], L):-verb(V,L-NP), obj(["the", "hall"], NP-[]).
 
 
-play:-assert(quit(false)),write('\33\[2J'),write('Welcome to text adventure. Feel free to \"look\" around'),repeat,read_words(W),parse(C,W),Command =.. C, do_it(Command),nl,win.
+play:-assert(quit(false)),write('Welcome to text adventure. Feel free to \"look\" around'),nl,repeat,read_words(W),parse(C,W),Command =.. C, do_it(Command),nl,win.
 
 %allows prefix notation so 'look bedroom.' is the same as 'look(bedroom).'
 :-op(40,fx,look).

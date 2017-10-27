@@ -607,6 +607,97 @@ function t28 () {
   printf "$test_string" | prolog -q
 }
 
+function t29 () {
+  test_string="
+  \n
+  $tf
+  play.
+  teleport to secret lab
+  study blue pylon
+  transfer small disk blue pylon
+  study blue pylon
+  quit
+  \n
+  "
+  printf "Expected Behavior:
+  $tf | true
+  play. | true -- enters game loop
+  teleport to secret lab | true
+  study blue pylon | true -- nothing there
+  transfer small disk blue pylon | true
+  study blue pylon | true --small disk there
+  quit | true -- exits game loop
+  "
+  printf "$test_string" | prolog -q
+}
+
+function t30 () {
+  test_string="
+  \n
+  $tf
+  play.
+  teleport to secret lab
+  transfer small disk to green pylon
+  transfer medium disk to blue pylon
+  transfer small disk to blue pylon
+  transfer large disk to green pylon
+  transfer small disk to red pylon
+  transfer medium disk to green pylon
+  transfer small disk to green pylon
+  \n
+  "
+  printf "Expected Behavior:
+  $tf | true
+  play. | true -- enters game loop
+  teleport to secret lab | You Teleported!
+  transfer small disk to green pylon | Transfer Successful
+  transfer medium disk to blue pylon | Transfer Successful
+  transfer small disk to blue pylon | Transfer Successful
+  transfer large disk to green pylon | Transfer Successful
+  transfer small disk to red pylon | Transfer Successful
+  transfer medium disk to green pylon | Transfer Successful
+  transfer small disk to green pylon |  Transfer Successful
+You win! 
+  \n
+  "
+  printf "$test_string" | prolog -q
+}
+
+function t31 () {
+  test_string="
+  \n
+  $tf
+  play.
+  summon flask
+  teleport to laser lab
+  summon dragon bone
+  make a charged bone
+  summon fly
+  teleport to the chemistry lab
+  look
+  inventory
+  make a potion
+  inventory
+  quit
+  \n
+  "
+  printf "Expected Behavior:
+  $tf | true
+  play. | true -- enters game loop
+  summon flask | You wizard you
+  summon bone | You wizard you
+  teleport to laser lab | You Teleported!
+  make a charged bone | You made a charged bone
+  teleport to chemistry lab | You Teleported!
+  summon fly | You wizard you
+  inventory | list of ^^ things
+  make a potion | You made a potion
+  inventory | oily black potion
+  quit | true -- exits game loop
+  "
+  printf "$test_string" | prolog -q
+}
+
 alias srtst="source ./run_tests.sh"
 
-functions=( t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 t13 t14 t15 t16 t17 t18 t19 t20 t21 t22 t23 t24 t25 t26 t27 t28) 
+functions=( t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 t13 t14 t15 t16 t17 t18 t19 t20 t21 t22 t23 t24 t25 t26 t27 t28 t29 t30 t31) 
