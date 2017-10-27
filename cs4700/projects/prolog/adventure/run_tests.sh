@@ -1,5 +1,5 @@
 # test file
-tf="[week3]."
+tf="[week4]."
 
 # Test 1 load my file, test here(X)
 function t1 () {
@@ -562,6 +562,51 @@ function t26 () {
   \n"
   printf "$test_string" | prolog -q
 }
+
+function t27 () {
+  test_string="
+  \n
+  $tf
+  play.
+  move to hall
+  move to bedroom
+  quit
+  \n
+  play.
+  quit game
+  \n
+  "
+  printf "Expected Behavior:
+  $tf | true
+  play. | true -- enters game loop
+  move to hall | -- player moves to hall, look.
+  move to bedroom | true -- player move to bedroom, look.
+  quit | true -- exits game loop
+  play. | true -- enters game loop
+  quit game | true -- exits game loop
+  "
+
+  printf "$test_string" | prolog -q
+}
+
+function t28 () {
+  test_string="
+  \n
+  $tf
+  play.
+  move to the hall
+  quit
+  \n
+  "
+  printf "Expected Behavior:
+  $tf | true
+  play. | true -- enters game loop
+  move to the hall | -- player moves to hall, look.
+  quit | true -- exits game loop
+  "
+  printf "$test_string" | prolog -q
+}
+
 alias srtst="source ./run_tests.sh"
 
-functions=( t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 t13 t14 t15 t16 t17 t18 t19 t20 t21 t22 t23 t24 t25 t26 ) 
+functions=( t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 t13 t14 t15 t16 t17 t18 t19 t20 t21 t22 t23 t24 t25 t26 t27 t28) 

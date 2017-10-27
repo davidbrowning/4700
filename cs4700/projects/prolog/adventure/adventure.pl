@@ -185,9 +185,9 @@ name(small_disk,"small energy disk").
 name(special_collections,"Special Collections Room").
 name(tsc,"Taggart Student Center").
 name(tsc_patio,"Patio of the TSC").
-name(tunnels_east,"Underground Tunnels").
-name(tunnels_north,"Underground Tunnels").
-name(tunnels_west,"Underground Tunnels").
+name(tunnels_east,"Underground Tunnels East").
+name(tunnels_north,"Underground Tunnels North").
+name(tunnels_west,"Underground Tunnels West").
 name(_,"").
 
 short_desc(agricultural_science,"Looks like a nice place to grab a bite.").
