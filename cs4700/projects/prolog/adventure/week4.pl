@@ -45,9 +45,23 @@ c_look(Container):-container(Container),location(Container,X),here(X),look(Conta
 
 %Unchecked version of move action
 teleport(Place):-retract(here(_)),assert(here(Place)),write('You Teleported!'),!.
+u_move(Place):-retract(here(_)),assert(here(Place)),!.
 
 %Checked version of move action
-move(Place):-puzzle(Place),here(Current),connection(Current,Place),teleport(Place),look(Place),!.
+move(Place):-puzzle(Place),here(Current),connection(Current,Place),u_move(Place),look(Place),!.
+move(outside):-outside.
+
+outside:-here(Loc),door(Loc,X),outside(X),move(X),!.
+outside:-here(Loc),door(X,Loc),outside(X),move(X),!.
+outside:-write('No way to go outside'),!.
+
+outside(plaza).
+outside(avenue).
+outside(eslc_north).
+outside(eslc_south).
+outside(quad).
+outside(roof).
+outside(tsc_patio).
 
 %Completely unchecked Take
 summon(Thing):-assert(has(Thing)),retract(location(Thing,_)),write('You wizard you').
@@ -98,8 +112,6 @@ remove_ingredients([H|T]):-retract(has(H)), remove_ingredients(T).
 
 make(Item):-create_recipe(E,I,Item),here(X),is_here(E,X),has_ingredients(I),remove_ingredients(I),assert(has(Item)),write('You made a '),write(Item),!.
 
-%obj(small_disk,["small","disk","to","blue","pylon" | X] -X).
-
 verb(transfer, ["transfer" | X] - X).
 verb(inventory, ["inventory" | X] - X).
 verb(make, ["make" | X] - X).
@@ -112,6 +124,7 @@ verb(teleport, ["teleport","to" | X] - X).
 verb(move, ["move" | X] - X).
 verb(move,["move","to" | X] - X).
 verb(move,["go","to" | X] - X).
+verb(move,["go" | X] - X).
 verb(look, ["look" | X] - X).
 verb(look, ["look","at" | X] - X).
 verb(study, ["study" | X] - X).
@@ -138,6 +151,8 @@ parse([V,O1,O2], L):-verb(V,L-NP), obj(O1, NP-PP), obj(O2, PP-[]).
 parse([V], L):-verb(V,L-_).
 %parse([V], L):-verb(V,L-NP), obj(["the", "hall"], NP-[]).
 
+obj(outside,["outside" | X] -X).
+obj(outside,["Outside" | X] -X).
 obj(agricultural_science,["Agricultural","Sciences","Building" | X] -X).
 obj(agricultural_science,["the","Agricultural","Sciences","Building" | X] -X).
 obj(animal_science,["Animal","Science","Building" | X] -X).
@@ -353,8 +368,6 @@ obj(laser,["laser" | X] -X).
 obj(laser,["the","laser" | X] -X).
 obj(bunsen_burner,["bunsen","burner" | X] -X).
 obj(bunsen_burner,["the","bunsen","burner" | X] -X).
-
-
 
 play:-assert(quit(false)),write('Welcome to text adventure. Feel free to \"look\" around'),nl,repeat,read_words(W),parse(C,W),Command =.. C, do_it(Command),nl,win.
 

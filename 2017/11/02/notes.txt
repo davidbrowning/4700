@@ -1,0 +1,40 @@
+Assignment
+
+Procedural Languages- Write to memory, always a side effect
+Functional and Logic = Create a new name binding to a constant value
+  "Let blah = expression"
+
+Ambiguous CFG: more than one parse tree to an expression.
+
+Type Conversions
+
+narrowing: target type cannot exactly represent all instances of the source type.
+widening: !narrow (destination type can accept all values) 
+ 8 to 32 bit int is widening
+ 32 to 8 bit int is narrowing (narrowing: might lose data)
+casting: way to express conversion
+ if widening: okay
+ if narrowing: could be problematic. 
+Q's for lang:
+ does it allow casting? if so, does it allow narrowing/widening
+ does it allow mixed mode expression 3.0 + 1
+
+Red/Black Trees
+ Null: black
+ Root: always black
+ Red Child: always has black parent
+ Node is either red or black. 
+ Every path from root to leaf has the same number of black nodes. 
+
+    X(b)
+  /a\  Y(r)
+      /b\ Z(r)
+         /c\ /d\
+    | |
+  \     /
+
+    Y(b)
+X(r)    z(r)
+
+
+

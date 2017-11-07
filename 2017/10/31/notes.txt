@@ -1,0 +1,64 @@
+__User Defined types__
+
+** Tests back on thursday **
+
+does lang allow user defined types. 
+
+well defined, and well understood objects THAT FIT IN YOUR DOMAIN
+ -- good idea
+
+First/Second class citizens. 
+
+First: You can do everything with the thing you defined that you could in a native type (c++)
+Second: You can't do everything with the thing you defined that you could in a native type (c++)
+
+Tools provided for encapsulation/abstraction (e.g. public/private, objects)
+
+User defined type constructors (take type return type). 
+   -- type*
+
+ vector is a type constructor.
+ Critical for generic programming style
+  benefits: pattern matchine or duck typing
+
+Expression:
+ Means of expressing computation
+ Combination of values and operators that has a value
+
+ peano addition. 
+
+Operator Overloading
+ can it be done?
+ langage overload operators
+ how does this affect the language
+ 
+ associator 
+  commutative, distributive, closed under itself
+  form a ring.
+ 
+ if assumtions are met regarding operators, code is clearer
+ if not, code is less clear
+
+Side Effects
+  An observable change of global state
+  - output parameters
+  - global variables
+  - class variables
+  - IO
+
+Referential transparency
+ Expression w/no side effects: you see its value
+ Functions are called pure if they have this property
+ Four major causes of impurity
+ - Error
+ - Non-determinism
+ - Context
+ - Destruction (output)
+
+Short-Circuit Evaluation
+ Value can be and is determined w/o evaluation the whole expression it is called short-circuit
+
+ 0 *(and) X = 0
+ 1 +(or) X = 1
+
+Also possible with memoized pure functions

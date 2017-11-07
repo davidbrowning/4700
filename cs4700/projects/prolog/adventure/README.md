@@ -26,6 +26,8 @@ $ ./run_all_tests.sh will
 $ source ./run_tests.sh
  * User may then call $ t$a where a is greater than 0 and a is less than 17 (e.g. t14)
 
+For week 4, run tests 27-32. (if you don't have bash, use the strings in run_tests.sh to test).  
+
 ## Contributors
 
 Just Me

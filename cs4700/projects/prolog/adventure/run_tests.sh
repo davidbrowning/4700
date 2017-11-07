@@ -698,6 +698,27 @@ function t31 () {
   printf "$test_string" | prolog -q
 }
 
+function t32 () {
+  test_string="
+  \n
+  $tf
+  play.
+  teleport to common room
+  go outside
+  quit
+  \n
+  "
+
+  printf "Expected Behavior:
+  $tf | true
+  play. | true -- enters game loop
+  teleport to common room | You Teleported!
+  go outside | move to engineering plaza
+  quit | true -- exits game loop
+  "
+  printf "$test_string" | prolog -q
+}
+
 alias srtst="source ./run_tests.sh"
 
 functions=( t1 t2 t3 t4 t5 t6 t7 t8 t9 t10 t11 t12 t13 t14 t15 t16 t17 t18 t19 t20 t21 t22 t23 t24 t25 t26 t27 t28 t29 t30 t31) 
