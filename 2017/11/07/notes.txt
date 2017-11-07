@@ -1,0 +1,5 @@
+foldr (takes a function and fully applies it to elements of a list)
+derivingshow -- haskell will print it
+-- foldr (+) 0 [1,2,3,4]
+data Name = Type Field Field .....
+Space has a very high precedence you may need parenthesis
