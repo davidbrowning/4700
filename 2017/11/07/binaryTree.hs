@@ -1,6 +1,9 @@
 data Color = Red | Black deriving Show
 data Tree x = Empty | Node Color (Tree x) x (Tree x) deriving Show
 
+height Empty = 0
+height (Node _ l r) = 1 + max(height l) (height r)
+
 insert Empty val = Node Red Empty val Empty
 insert (Node c left val right) x 
  | x == val = Node c left val right
