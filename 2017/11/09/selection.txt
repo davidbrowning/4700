@@ -1,0 +1,41 @@
+selection shit.
+Multiple selection:
+
+std::map<string, function<uuid(uuid)>>  #this is the command pattern in c++
+
+Jump Table:
+ A[index] = address
+
+ goto A[switch];
+
+
+Iteration
+ Used for repetition
+  <procedural languages only>
+   How to control iteration?
+   Where does structure appear?
+  Counter controlled loop
+   loop var
+   begin; end; step
+   For
+   For Each
+
+  Iterators are associated with containers and 
+   know how to traverse containers. *Elements of Programming: 
+
+Logically Controlled Loop
+ Has a condition
+  test before or after?
+  while(e)
+  do ... while(e)
+
+User located loop exits(break, last, final...)
+Skip statement
+ continue
+Used to eliminate some usese of goto
+
+Dijkstra's 1968 seminal paper (goto considered harmful)
+
+Human -> Static Program -> machine -> dynamic process
+
+
