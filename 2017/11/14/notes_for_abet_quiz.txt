@@ -1,0 +1,94 @@
+
+
+Subprogram
+ Basic Subprograms have:
+  Single entry point
+  Suspend the caller
+   -until they return
+
+ Multiple entry points gives coroutines
+ Avoiding suspension give concurrency
+
+  The definition includes
+   - Interface
+   - Actions
+
+  Call and Return
+   - Call: the request to enter a sub program
+   - Return: resumption of the calling program (possibly w/a value)
+   - A subprogram is active between call and return
+
+  Procedures and Functions
+   - Procedures
+    * Do not return 
+    * They are intended as extension points for statements in the language
+    * Mostly a feature of older language
+   - Functions
+    * Return
+    * Modeled on math function
+    * Generally should not have side effects
+
+  Side effects
+   - Ways in which CS function is not a math function
+   - Context
+    * global variables
+    * static local variables
+   - Error
+   - Non-determinism
+   - Destruction
+    * I/O
+    * out parameter
+
+  Coroutines
+   - Include yield and resume
+   - yield returns a values but maintains current state
+   - resume restarts co-routine after last yeild
+   - call and return still exist and define the lifetime
+
+ Return Values
+  - What are the types of return
+  - What are the number of return types
+
+ Formal and Actual
+  - The parameter definitions in the header are called formal
+  - The parameter values in a call site are called actual
+
+ Positional Keyword
+  - if the matching between formal and actual parameters is based
+   only on order then the language uses positional parameters
+  - If each actual parameter can be associated with a formal
+   parameter name in any order the language used keyword parameters
+    * foo(bar = 42)
+
+ Parameter passing
+  - pass by value
+   * only val is passed
+  - pass by results
+   * local variable is created
+   * value is copied into caller at end of function
+  - pass by value result
+   * copy passed to function
+   * value copied back to caller
+   * also called pass by copy
+  - pass by reference
+   * create and copy an alias
+  - pass by name
+   * as if parameter was textually substituted 
+   * referencing env must also be included for
+    some name lookups
+
+ Type checking parameters
+  - Do formal parameters have type
+  - Do formal and actual parameters have to match
+ 
+ Multidimensional arrays as parameters
+  - a language needs to be able to build the array mapping
+  - complicates passing arrays
+   * Send a pointer and do pointer arithmetic
+   * Less flexible function (specific array size and layout)
+   * More complex built in arrays
+
+ Sub-programs passed as parameters? restrictions? what referencing env goes w/it?
+  shallow binding
+  deep binding
+  speced at call site ad hoc

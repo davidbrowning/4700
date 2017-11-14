@@ -9,8 +9,8 @@
 -- 3. The root and leaves of the tree are black.
 --
 
-data Color = Red | Black deriving Show
-data Tree x = Empty | Node Color (Tree x) x (Tree x) deriving Show
+data Color = Red | Black deriving (Show)
+data Tree x = Empty | Node Color (Tree x) x (Tree x) deriving (Show)
 
 height Empty = 0
 height (Node _ l val r) = 1 + max(height l) (height r)
@@ -32,20 +32,15 @@ balance (Node Black a x (Node Red (Node Red b y c) z d)) = Node Red (Node Black 
 balance (Node Black a x (Node Red b y (Node Red c z d))) = Node Red (Node Black a x b) y (Node Black c z d)
 balance t = t
 
-prettyprint (Leaf)
-    = "Empty root."
--- unlines concats a list with newlines
-prettyprint (Branch left node right) = unlines (prettyprint_helper (Branch left node right n h))
+--pad = zipWidth (++) (repeat "   ")
 
-prettyprint_helper (Branch left node right)
-    = (show node) : (prettyprint_subtree left right)
-        where
-            prettyprint_subtree left right =
-                ((pad "+- " "|  ") (prettyprint_helper right))
-                    ++ ((pad "`- " "   ") (prettyprint_helper left))
-            pad first rest = zipWith (++) (first : repeat rest)
-prettyprint_helper (Leaf)
-    = []
+--prettyprint (Node)
+-- = "Nothing"
 
+printTree :: Tree Color ->  String
+printTree x = case x of
+ Node c a num b -> show num ++ "\n" ++ printTree a ++ "\n" ++ printTree b
+ Empty -> "Empty"
+--
 -- from here use foldl treeInsert Empty [5,1,4,4,2,7,3,8]
 --(balance)
