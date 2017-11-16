@@ -1,0 +1,16 @@
+#ifndef EXPECTED_HPP
+#define EXPECTED_HPP
+#include<exception>
+
+template<typename T>
+class Expected{
+ public:
+ private:
+ union 
+ {
+  T t;
+  std::execption_ptr e;
+ }
+ bool valid;
+
+ };
