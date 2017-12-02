@@ -96,7 +96,7 @@ cd $d
 
 # Note: If you wish to run a test case, uncomment the following line 
 # echo "preforming test case!"; current_course="Programming Languages" 
-
+if [ -z $current_course ]; then current_course="No Title"; fi
 notes_name=$(echo $current_course | cut -d ' ' -f1)
 notes_name=$notes_name$(echo $current_course | cut -d ' ' -f2).tex
 echo $notes_name
