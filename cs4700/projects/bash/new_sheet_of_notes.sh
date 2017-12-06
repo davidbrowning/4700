@@ -47,8 +47,7 @@ function find_out_which_class () {
   # current_hour=10
   # current_minute=45
   day_schedge=${schedule[$(date +%A)]}; # 1
-  current_hour=$(date +%H); # 2
-  current_minute=$(date +%M); #3
+  current_time=$(date +%H%M); # 2
   number_of_classes=$(echo $day_schedge | grep -o ',' | wc -l);
   current_course="";
   for ((i = 1; i <= number_of_classes; i += 1)); do
@@ -59,11 +58,16 @@ function find_out_which_class () {
     end_time=$(echo $time | cut -d '-' -f2);
     course_start_hour=$(echo $start_time | cut -d ':' -f1);
     course_start_minute=$(echo $start_time | cut -d ':' -f2);
+    course_start_time=$course_start_hour$course_start_minute
+    echo "course start time:" $course_start_time
+
     course_end_hour=$(echo $end_time | cut -d ':' -f1);
     course_end_minute=$(echo $end_time | cut -d ':' -f2);
-    if ([ $current_hour -ge $course_start_hour ] && [ $current_minute -ge $course_start_minute ]);
+    course_end_time=$course_end_hour$course_end_minute
+    
+    if ([ $current_time -ge $course_start_time ]);
     then
-      if ([ $current_hour -le $course_end_hour ] && [ $current_minute -le $course_end_minute ]);
+      if ([ $current_time -le $course_end_time ]);
       then
         # you are currently in the time frame of the given course
         current_course=$course_name
